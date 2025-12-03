@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Commission System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input, select, button {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .agent-list, .transaction-list {
+            margin-top: 20px;
+        }
+        .item {
+            padding: 10px;
+            border: 1px solid #eee;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .response {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Real Estate Commission System</h1>
+    
+    <!-- Agent Operations -->
+    <div class="container">
+        <h2>Agent Operations</h2>
+        
+        <!-- Create Agent -->
+        <h3>Create Agent</h3>
+        <form id="agentForm">
+            <input type="text" id="agentName" placeholder="Agent Name" required>
+            <input type="email" id="agentEmail" placeholder="Agent Email" required>
+            <button type="submit">Create Agent</button>
+        </form>
+        
+        <!-- List All Agents -->
+        <h3>All Agents</h3>
+        <button onclick="getAllAgents()">Get All Agents</button>
+        
+        <!-- Agent Financial Breakdowns -->
+        <h3>Agent Financial Breakdowns</h3>
+        <form id="agentBreakdownForm">
+            <input type="text" id="agentBreakdownId" placeholder="Agent ID" required>
+            <button type="submit">Get Agent Breakdowns</button>
+        </form>
+        
+        <div id="agentResponse" class="response"></div>
+    </div>
+    
+    <!-- Transaction Operations -->
+    <div class="container">
+        <h2>Transaction Operations</h2>
+        
+        <!-- Create Transaction -->
+        <h3>Create Transaction</h3>
+        <form id="transactionForm">
+            <input type="number" id="totalServiceFee" placeholder="Total Service Fee" required>
+            <input type="text" id="listingAgentId" placeholder="Listing Agent ID" required>
+            <input type="text" id="sellingAgentId" placeholder="Selling Agent ID" required>
+            <button type="submit">Create Transaction</button>
+        </form>
+        
+        <!-- Update Transaction Stage -->
+        <h3>Update Transaction Stage</h3>
+        <form id="updateStageForm">
+            <input type="text" id="transactionId" placeholder="Transaction ID" required>
+            <select id="newStage" required>
+                <option value="">Select Stage</option>
+                <option value="agreement">Agreement</option>
+                <option value="earnest_money">Earnest Money</option>
+                <option value="title_deed">Title Deed</option>
+                <option value="completed">Completed</option>
+            </select>
+            <button type="submit">Update Stage</button>
+        </form>
+        
+        <!-- Find Transaction -->
+        <h3>Find Transaction</h3>
+        <form id="findTransactionForm">
+            <input type="text" id="findTransactionId" placeholder="Transaction ID" required>
+            <button type="submit">Find Transaction</button>
+        </form>
+        
+        <!-- List All Transactions -->
+        <h3>List All Transactions</h3>
+        <button onclick="getAllTransactions()">Get All Transactions</button>
+        
+        <div id="transactionResponse" class="response"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000';
+        
+        // Agent Operations
+        document.getElementById('agentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const agentData = {
+                name: document.getElementById('agentName').value,
+                email: document.getElementById('agentEmail').value,
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/agents`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(agentData)
+                });
+                const result = await response.json();
+                document.getElementById('agentResponse').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('agentResponse').textContent = 'Error: ' + error.message;
+            }
+        });
+        
+        async function getAllAgents() {
+            try {
+                const response = await fetch(`${API_BASE}/api/agents`);
+                const result = await response.json();
+                document.getElementById('agentResponse').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('agentResponse').textContent = 'Error: ' + error.message;
+            }
+        }
+        
+        // Agent Financial Breakdowns
+        document.getElementById('agentBreakdownForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const agentId = document.getElementById('agentBreakdownId').value;
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/agents/${agentId}/breakdowns`);
+                const result = await response.json();
+                document.getElementById('agentResponse').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('agentResponse').textContent = 'Error: ' + error.message;
+            }
+        });
+        
+        // Transaction Operations
+        document.getElementById('transactionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const transactionData = {
+                totalServiceFee: parseFloat(document.getElementById('totalServiceFee').value),
+                listingAgentId: document.getElementById('listingAgentId').value,
+                sellingAgentId: document.getElementById('sellingAgentId').value
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/transactions`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(transactionData)
+                });
+                const result = await response.json();
+                document.getElementById('transactionResponse').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('transactionResponse').textContent = 'Error: ' + error.message;
+            }
+        });
+        
+        document.getElementById('updateStageForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const transactionId = document.getElementById('transactionId').value;
+            const newStage = document.getElementById('newStage').value;
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/transactions/${transactionId}/stage`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ newStage })
+                });
+                const result = await response.json();
+                document.getElementById('transactionResponse').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('transactionResponse').textContent = 'Error: ' + error.message;
+            }
+        });
+        
+        // Get All Transactions
+        async function getAllTransactions() {
+            try {
+                const response = await fetch(`${API_BASE}/api/transactions`);
+                const result = await response.json();
+                document.getElementById('transactionResponse').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('transactionResponse').textContent = 'Error: ' + error.message;
+            }
+        }
+        
+        document.getElementById('findTransactionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const transactionId = document.getElementById('findTransactionId').value;
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/transactions/${transactionId}`);
+                const result = await response.json();
+                document.getElementById('transactionResponse').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('transactionResponse').textContent = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
