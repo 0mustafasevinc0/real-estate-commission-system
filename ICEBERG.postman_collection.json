@@ -21,12 +21,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/agents",
-					"protocol": "http",
+					"raw": "https://real-estate-commission-system.onrender.com/api/agents",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"real-estate-commission-system",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"agents"
@@ -53,15 +54,50 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/agents",
-					"protocol": "http",
+					"raw": "https://real-estate-commission-system.onrender.com/api/agents",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"real-estate-commission-system",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"agents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agent",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://real-estate-commission-system.onrender.com/api/agents/692ef8b7d17dfc982eaccbdd",
+					"protocol": "https",
+					"host": [
+						"real-estate-commission-system",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"api",
+						"agents",
+						"692ef8b7d17dfc982eaccbdd"
 					]
 				}
 			},
@@ -85,12 +121,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/agents/692f1a387c1bc50a73a49de6/breakdowns",
-					"protocol": "http",
+					"raw": "https://real-estate-commission-system.onrender.com/api/agents/692f1a387c1bc50a73a49de6/breakdowns",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"real-estate-commission-system",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"agents",
@@ -119,12 +156,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/transactions",
-					"protocol": "http",
+					"raw": "https://real-estate-commission-system.onrender.com/api/transactions",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"real-estate-commission-system",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"transactions"
@@ -148,12 +186,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/transactions",
-					"protocol": "http",
+					"raw": "https://real-estate-commission-system.onrender.com/api/transactions",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"real-estate-commission-system",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"transactions"
@@ -177,12 +216,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/transactions/692f75a07d219f20be9728df/stage",
-					"protocol": "http",
+					"raw": "https://real-estate-commission-system.onrender.com/api/transactions/692f75a07d219f20be9728df/stage",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"real-estate-commission-system",
+						"onrender",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"api",
 						"transactions",

@@ -13,8 +13,8 @@ Bu proje, bir emlak acentesi için işlemin yaşam döngüsünü takip eden ve t
 
 ## 🌐 Canlı API URL (Deployment)
 
-**https://example.com**
-*Örnek Uç Nokta:* `GET https://example.com/api/transactions/60c72b2f9b1e8b0015b3c3c1`
+**https://real-estate-commission-system.onrender.com/api**
+*Örnek Uç Nokta:* `GET https://real-estate-commission-system.onrender.com/api/transactions/60c72b2f9b1e8b0015b3c3c1`
 
 ## 🚀 Kurulum ve Yerel Geliştirme
 
@@ -119,7 +119,7 @@ Actions: calculateCommissions (completed aşamasında)
 
 ## 🎯 Web Arayüzü
 
-`http://localhost:3000/api` adresinde basit bir web arayüzü mevcuttur:
+`https://real-estate-commission-system.onrender.com/api` adresinde basit bir web arayüzü mevcuttur:
 
 - **Agent Operations:** Acente oluşturma, listeleme, finansal döküm sorgulama
 - **Transaction Operations:** İşlem oluşturma, aşama güncelleme, detay görüntüleme
